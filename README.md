@@ -24,3 +24,8 @@ Options:
                         Out Directory
 
 ```
+
+building:
+```sh
+$ cargo build
+```
