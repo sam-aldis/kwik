@@ -1,0 +1,10 @@
+[package]
+authors = ["Sam Aldis <samuel.aldis@owasp.org>"]
+edition = "2018"
+name = "kwik"
+version = "0.1.0"
+[dependencies]
+args = "*"
+subprocess = "*"
+getopts = "*"
+git2 = "*"
