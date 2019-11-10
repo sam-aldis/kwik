@@ -27,5 +27,8 @@ Options:
 
 building:
 ```sh
-$ cargo build
+$ git clone https://github.com/sam-aldis/kwik.git
+$ cd kwik
+$ cargo build --release
+$ sudo cp ./target/release/kwik /usr/local/bin/
 ```
