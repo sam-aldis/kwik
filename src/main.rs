@@ -7,8 +7,10 @@ use getopts::{Options, Occur, HasArg};
 use args::{Args, ArgsError};
 use git2::Repository;
 
-const IDE_LINUX: &'static str = "vscode-server-linux";
-const IDE_DARWIN: &'static str = "vscode-server-dosx";
+const IDE_LINUX: &'static str = "https://github.com/cdr/code-server/releases/download/2.1688-vsc1.39.2/code-server2.1688-vsc1.39.2-linux-x86_64.tar.gz";
+const IDE_DARWIN: &'static str = "https://github.com/cdr/code-server/releases/download/2.1688-vsc1.39.2/code-server2.1688-vsc1.39.2-darwin-x86_64.zip";
+const IDE_EXTRACTED_LINUX: &'static str = "code-server2.1688-vsc1.39.2-linux-x86_64";
+const IDE_EXTRACTED_DARWIN: &'static str = "code-server2.1688-vsc1.39.2-darwin-x86_64";
 
 fn main() {
     arg_parse();
@@ -44,8 +46,17 @@ fn get_ide(os : &str, out : &str) {
         "osx" => IDE_DARWIN,
         _ => IDE_LINUX,
     };
-    let _ = Repository::clone("https://github.com/sam-aldis/IDEs", &format!("{}/ides", out));
-    let _cmd = Exec::cmd(format!("{}/ides/{}",out,vscode)).args(&["--open","--port","9091"]).stream_stdout();
+    let bundle = match os {
+        "linux" => "tar --gzip -xf",
+        "osx" => "unzip",
+        _ => "tar --gzip -xf",
+    };
+    let outdir = match os {
+        "linux" => IDE_EXTRACTED_LINUX,
+        "osx" => IDE_EXTRACTED_DARWIN,
+        _ => IDE_EXTRACTED_LINUX,
+    };
+    let _ = Exec::shell(&format!("wget {} -O ./{}/code-server && cd ./{}/ && {} ./code-server && && rm ./code-server && pwd && cd {} && ./code-server --open --port 9091", vscode, out, out, bundle, outdir)).join();
 }
 fn clone(url : &str, path : &str) -> Result<git2::Repository, git2::Error> {
     //let url = "https://github.com/sam-aldis/RedTeam-Toolkit";
