@@ -56,7 +56,7 @@ fn get_ide(os : &str, out : &str) {
         "osx" => IDE_EXTRACTED_DARWIN,
         _ => IDE_EXTRACTED_LINUX,
     };
-    let _ = Exec::shell(&format!("wget {} -O ./{}/code-server && cd ./{}/ && {} ./code-server && && rm ./code-server && pwd && cd {} && ./code-server --open --port 9091", vscode, out, out, bundle, outdir)).join();
+    let _ = Exec::shell(&format!("wget {} -O ./{}/code-server && cd ./{}/ && {} ./code-server && rm ./code-server && pwd && cd {} && ./code-server --open --port 9091", vscode, out, out, bundle, outdir)).join();
 }
 fn clone(url : &str, path : &str) -> Result<git2::Repository, git2::Error> {
     //let url = "https://github.com/sam-aldis/RedTeam-Toolkit";
