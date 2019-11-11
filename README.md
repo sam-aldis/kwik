@@ -11,22 +11,25 @@ running ready for you to start coding.
 ```sh
 # use kwik -h for access to the usage:
 ~/Projects $ kwik -h
-Usage: kwik [-h] [-o <os>] [-p <Scaffold>] [-d <Directory>]
+Usage: kwik [-h] [-o <os>] [-p <repo>] [-d <directory>]
 
 quickly scaffold from a repo
 
 Options:
     -h, --help          Show Help
     -o, --os <os>       OS to download and bootstrap IDE for <[linux]/osx>
-    -p, --project <Scaffold>
-                        The Scaffold you wish to use i.e sam-aldis/RustPython
-			#note this converts to https://github.com/sam-aldis/RustPython
-    -d, --dir <Directory>
-                        Out Directory
+    -p, --project <repo>
+                        The repo you wish to use, prefix with _i.e
+                        _sam-aldis/kwik becomes
+                        https://github.com/sam-aldis/kwik or any repo with
+                        <url>
+    -d, --dir <directory>
+                        Out Directory [note used unsanitized, do not setuid as
+                        root!]
 
 ```
 
-building:
+building yourself:
 ```sh
 $ git clone https://github.com/sam-aldis/kwik.git
 $ cd kwik
@@ -37,5 +40,5 @@ $ sudo cp ./target/release/kwik /usr/local/bin/
 quickstart for new projects (with docker)
 ```sh
 $ docker run -it -p 9091:9091 ukjp/kwik
-> kwik -o linux -p sam-aldis/kiwk -d kwik-dev
+> kwik -o linux -p _/sam-aldis/kiwk -d kwik-dev
 ```
