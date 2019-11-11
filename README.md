@@ -5,7 +5,7 @@ Quickly Scaffold and setup a new project with a code-server.
 Clone *any* github project and download and bootstrap a code-server
 running ready for you to start coding.
 
-![](./kwik-full.png)
+![](./kwik.png)
 
 
 ```sh
