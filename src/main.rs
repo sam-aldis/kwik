@@ -23,8 +23,8 @@ fn arg_parse() {
     let mut args = Args::new("kwik", "quickly scaffold from a repo");
     args.flag("h", "help", "Show Help");
     args.option("o", "os", "OS to download and bootstrap IDE for <[linux]/osx>", "<os>", Occur::Req, Option::from(String::from("linux")));
-    args.option("p", "project", "The repo you wish to use i.e sam-aldis/kwik becomes https://github.com/sam-aldis/kwik", "<repo>", Occur::Req, Option::from(String::from("sam-aldis/RustPython")));
-    args.option("d", "dir", "Out Directory", "<Directory>", Occur::Req, Option::from(String::from("./")));
+    args.option("p", "project", "The repo you wish to use, prefix with _/ i.e _/sam-aldis/kwik becomes https://github.com/sam-aldis/kwik or any repo with <url>", "<repo>", Occur::Req, Option::from(String::from("sam-aldis/RustPython")));
+    args.option("d", "dir", "Out Directory [note used unsanitized, do not setuid as root!]", "<directory>", Occur::Req, Option::from(String::from("./")));
     args.parse_from_cli().unwrap();
     let help = args.value_of("help").unwrap();
     if help {
@@ -70,5 +70,8 @@ fn get_ide(os : &str, out : &str) {
 }
 fn clone(url : &str, path : &str) -> Result<git2::Repository, git2::Error> {
     //clone the url to path
-    return Repository::clone(&format!("https://github.com/{}",url), path);
+    return match url.chars().nth(0).unwrap() {
+        '_' => Repository::clone(&format!("https://github.com/{}",url.replace("_/", "")), path),
+        _ => Repository::clone(url, path),
+    };    
 }
