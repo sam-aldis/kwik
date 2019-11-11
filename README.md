@@ -20,7 +20,7 @@ Options:
     -o, --os <os>       OS to download and bootstrap IDE for <[linux]/osx>
     -p, --project <Scaffold>
                         The Scaffold you wish to use i.e sam-aldis/RustPython
-			#note this converts to https://sam-aldis/RustPython
+			#note this converts to https://github.com/sam-aldis/RustPython
     -d, --dir <Directory>
                         Out Directory
 
