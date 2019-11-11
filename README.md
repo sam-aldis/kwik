@@ -32,3 +32,9 @@ $ cd kwik
 $ cargo build --release
 $ sudo cp ./target/release/kwik /usr/local/bin/
 ```
+
+quickstart for new projects (with docker)
+```sh
+$ docker run -it -p 9091:9091 ukjp/kwik
+> kwik -o linux -p sam-aldis/kiwk -d kwik-dev
+```
