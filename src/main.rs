@@ -23,7 +23,7 @@ fn arg_parse() {
     let mut args = Args::new("kwik", "quickly scaffold from a repo");
     args.flag("h", "help", "Show Help");
     args.option("o", "os", "OS to download and bootstrap IDE for <[linux]/osx>", "<os>", Occur::Req, Option::from(String::from("linux")));
-    args.option("p", "project", "The Scaffold you wish to use i.e sam-aldis/RustPython", "<Scaffold>", Occur::Req, Option::from(String::from("sam-aldis/RustPython")));
+    args.option("p", "project", "The repo you wish to use i.e sam-aldis/kwik becomes https://github.com/sam-aldis/kwik", "<repo>", Occur::Req, Option::from(String::from("sam-aldis/RustPython")));
     args.option("d", "dir", "Out Directory", "<Directory>", Occur::Req, Option::from(String::from("./")));
     args.parse_from_cli().unwrap();
     let help = args.value_of("help").unwrap();
